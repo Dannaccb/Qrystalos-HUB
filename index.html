@@ -6,893 +6,619 @@
 <title>Qrystalos Support Hub — IX Colombia</title>
 <style>
   :root {
-    --orange: #F59E0B;
-    --orange-dark: #D97706;
-    --orange-light: #FEF3C7;
-    --bg: #F9FAFB;
-    --surface: #FFFFFF;
-    --border: #E5E7EB;
-    --border-strong: #D1D5DB;
-    --text: #111827;
-    --text-muted: #6B7280;
-    --text-light: #9CA3AF;
-    --radius: 10px;
-    --radius-sm: 6px;
-    --shadow: 0 1px 3px rgba(0,0,0,0.07), 0 1px 2px rgba(0,0,0,0.04);
-    --shadow-md: 0 4px 6px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.05);
+    --orange: #F59E0B; --orange-dark: #D97706; --orange-light: #FEF3C7;
+    --bg: #F9FAFB; --surface: #FFFFFF; --border: #E5E7EB; --border-strong: #D1D5DB;
+    --text: #111827; --text-muted: #6B7280; --radius: 10px; --radius-sm: 6px;
+    --shadow: 0 1px 3px rgba(0,0,0,0.07);
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); font-size: 15px; min-height: 100vh; }
-
-  /* SIDEBAR */
   .layout { display: flex; min-height: 100vh; }
-  .sidebar { width: 240px; background: var(--surface); border-right: 1px solid var(--border); display: flex; flex-direction: column; position: fixed; top: 0; left: 0; height: 100vh; z-index: 10; }
-  .sidebar-logo { padding: 20px 20px 16px; border-bottom: 1px solid var(--border); }
-  .sidebar-logo .brand { font-size: 13px; font-weight: 700; letter-spacing: .08em; color: var(--orange-dark); text-transform: uppercase; }
-  .sidebar-logo .sub { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
-  .sidebar-logo .ix-badge { display: inline-flex; align-items: center; gap: 6px; margin-top: 10px; background: var(--orange-light); color: var(--orange-dark); font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 20px; }
-  .nav { padding: 12px 10px; flex: 1; }
-  .nav-item { display: flex; align-items: center; gap: 10px; padding: 9px 12px; border-radius: var(--radius-sm); cursor: pointer; font-size: 14px; color: var(--text-muted); transition: all .15s; margin-bottom: 2px; border: none; background: none; width: 100%; text-align: left; }
+  .sidebar { width: 230px; background: var(--surface); border-right: 1px solid var(--border); display: flex; flex-direction: column; position: fixed; top: 0; left: 0; height: 100vh; z-index: 10; }
+  .sidebar-logo { padding: 18px 18px 14px; border-bottom: 1px solid var(--border); }
+  .brand { font-size: 13px; font-weight: 700; letter-spacing: .08em; color: var(--orange-dark); text-transform: uppercase; }
+  .sub { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+  .ix-badge { display: inline-flex; align-items: center; gap: 5px; margin-top: 10px; background: var(--orange-light); color: var(--orange-dark); font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 20px; }
+  .nav { padding: 10px 8px; flex: 1; }
+  .nav-item { display: flex; align-items: center; gap: 10px; padding: 9px 12px; border-radius: var(--radius-sm); cursor: pointer; font-size: 14px; color: var(--text-muted); transition: all .15s; margin-bottom: 2px; border: none; background: none; width: 100%; text-align: left; font-family: inherit; }
   .nav-item:hover { background: var(--bg); color: var(--text); }
   .nav-item.active { background: var(--orange-light); color: var(--orange-dark); font-weight: 600; }
-  .nav-item svg { width: 17px; height: 17px; flex-shrink: 0; }
-  .nav-badge { margin-left: auto; background: var(--orange); color: white; font-size: 11px; font-weight: 700; padding: 1px 7px; border-radius: 20px; }
+  .nav-badge { margin-left: auto; background: var(--orange); color: white; font-size: 11px; font-weight: 700; padding: 1px 7px; border-radius: 20px; display: none; }
   .sidebar-footer { padding: 14px; border-top: 1px solid var(--border); }
-  .api-key-section label { font-size: 12px; color: var(--text-muted); display: block; margin-bottom: 5px; }
-  .api-key-section input { width: 100%; padding: 7px 10px; border: 1px solid var(--border-strong); border-radius: var(--radius-sm); font-size: 12px; color: var(--text); background: var(--bg); }
-  .api-key-section input:focus { outline: none; border-color: var(--orange); }
-  .api-save-btn { margin-top: 6px; width: 100%; padding: 7px; background: var(--orange); color: white; border: none; border-radius: var(--radius-sm); font-size: 12px; font-weight: 600; cursor: pointer; transition: background .15s; }
-  .api-save-btn:hover { background: var(--orange-dark); }
+  .api-label { font-size: 12px; color: var(--text-muted); margin-bottom: 5px; display: block; }
+  .api-input { width: 100%; padding: 7px 10px; border: 1px solid var(--border-strong); border-radius: var(--radius-sm); font-size: 12px; color: var(--text); background: var(--bg); font-family: inherit; }
+  .api-input:focus { outline: none; border-color: var(--orange); }
+  .api-btn { margin-top: 6px; width: 100%; padding: 7px; background: var(--orange); color: white; border: none; border-radius: var(--radius-sm); font-size: 12px; font-weight: 600; cursor: pointer; font-family: inherit; transition: background .15s; }
+  .api-btn:hover { background: var(--orange-dark); }
   .api-status { font-size: 11px; margin-top: 5px; text-align: center; }
   .api-status.ok { color: #059669; } .api-status.err { color: #DC2626; }
-
-  /* MAIN */
-  .main { margin-left: 240px; flex: 1; padding: 32px; max-width: calc(100% - 240px); }
+  .main { margin-left: 230px; flex: 1; padding: 30px 36px; }
   .page { display: none; } .page.active { display: block; }
-  .page-header { margin-bottom: 28px; }
-  .page-title { font-size: 22px; font-weight: 700; color: var(--text); }
+  .page-header { margin-bottom: 24px; }
+  .page-title { font-size: 21px; font-weight: 700; }
   .page-sub { font-size: 14px; color: var(--text-muted); margin-top: 4px; }
-
-  /* CARDS */
-  .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; margin-bottom: 18px; box-shadow: var(--shadow); }
-  .card-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
-  .card-title svg { color: var(--orange); }
-
-  /* FORMS */
-  .form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-  .form-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
-  .form-grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; margin-bottom: 16px; box-shadow: var(--shadow); }
+  .card-title { font-size: 14px; font-weight: 600; margin-bottom: 14px; color: var(--text); }
+  .g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .g3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+  .g5 { display: grid; grid-template-columns: repeat(5,1fr); gap: 10px; }
   .fg { margin-bottom: 14px; }
-  .fg label { display: block; font-size: 13px; font-weight: 500; color: var(--text-muted); margin-bottom: 6px; }
-  .fg input, .fg select, .fg textarea { width: 100%; padding: 9px 12px; border: 1px solid var(--border-strong); border-radius: var(--radius-sm); font-size: 14px; color: var(--text); background: var(--surface); font-family: inherit; resize: vertical; transition: border-color .15s; }
+  .fg label { display: block; font-size: 13px; font-weight: 500; color: var(--text-muted); margin-bottom: 5px; }
+  .fg input, .fg select, .fg textarea { width: 100%; padding: 9px 11px; border: 1px solid var(--border-strong); border-radius: var(--radius-sm); font-size: 14px; color: var(--text); background: var(--surface); font-family: inherit; resize: vertical; transition: border-color .15s; }
   .fg input:focus, .fg select:focus, .fg textarea:focus { outline: none; border-color: var(--orange); box-shadow: 0 0 0 3px rgba(245,158,11,.1); }
-
-  /* BUTTONS */
   .btn { display: inline-flex; align-items: center; gap: 7px; padding: 9px 18px; border-radius: var(--radius-sm); font-size: 14px; font-weight: 500; cursor: pointer; transition: all .15s; border: 1px solid var(--border-strong); background: var(--surface); color: var(--text); font-family: inherit; }
-  .btn:hover { background: var(--bg); }
-  .btn:active { transform: scale(.98); }
+  .btn:hover { background: var(--bg); } .btn:active { transform: scale(.98); }
   .btn-primary { background: var(--orange); color: white; border-color: var(--orange); }
   .btn-primary:hover { background: var(--orange-dark); border-color: var(--orange-dark); }
   .btn-sm { padding: 6px 13px; font-size: 13px; }
-  .btn-ghost { border-color: transparent; background: transparent; color: var(--text-muted); }
-  .btn-ghost:hover { background: var(--bg); color: var(--text); }
-  .btn-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 4px; }
-
-  /* BADGES */
+  .btn-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 6px; }
   .badge { display: inline-block; font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 20px; }
-  .badge-dev { background: #FEF3C7; color: #92400E; }
-  .badge-sop { background: #DBEAFE; color: #1E40AF; }
-  .badge-cap { background: #D1FAE5; color: #065F46; }
-  .badge-pen { background: #FEF3C7; color: #92400E; }
-  .badge-fir { background: #D1FAE5; color: #065F46; }
-  .badge-act { background: #EDE9FE; color: #5B21B6; }
-
-  /* RESULT BOX */
-  .result-box { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 16px; font-size: 13px; line-height: 1.8; white-space: pre-wrap; font-family: 'Consolas', 'Courier New', monospace; margin-top: 14px; max-height: 420px; overflow-y: auto; }
-  .result-header { display: flex; align-items: center; justify-content: space-between; margin-top: 18px; margin-bottom: 6px; }
-  .result-header p { font-size: 14px; font-weight: 600; }
-
-  /* LOADING */
-  .loading { display: none; align-items: center; gap: 10px; color: var(--text-muted); font-size: 14px; margin-top: 14px; }
-  .spinner { width: 18px; height: 18px; border: 2px solid var(--border); border-top-color: var(--orange); border-radius: 50%; animation: spin .7s linear infinite; }
-  @keyframes spin { to { transform: rotate(360deg); } }
-
-  /* DIVIDER */
-  hr { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
-
-  /* METRICS */
-  .metrics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 22px; }
-  .metric-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); }
-  .metric-val { font-size: 28px; font-weight: 700; color: var(--text); }
-  .metric-lbl { font-size: 13px; color: var(--text-muted); margin-top: 4px; }
-  .metric-accent { border-top: 3px solid var(--orange); }
-
-  /* TABLE */
+  .b-dev { background: #FEF3C7; color: #92400E; } .b-sop { background: #DBEAFE; color: #1E40AF; }
+  .b-cap { background: #D1FAE5; color: #065F46; } .b-pen { background: #FEF3C7; color: #92400E; }
+  .b-fir { background: #D1FAE5; color: #065F46; } .b-act { background: #EDE9FE; color: #5B21B6; }
+  .result-box { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 18px; font-size: 13px; line-height: 1.9; white-space: pre-wrap; font-family: 'Consolas','Courier New',monospace; margin-top: 14px; max-height: 520px; overflow-y: auto; }
+  .result-hdr { display: flex; align-items: center; justify-content: space-between; margin-top: 18px; margin-bottom: 6px; }
+  .result-hdr p { font-size: 14px; font-weight: 600; }
+  .subtabs { display: flex; gap: 8px; margin-bottom: 20px; }
+  .subtab { padding: 8px 16px; border-radius: var(--radius-sm); border: 1px solid var(--border-strong); background: transparent; color: var(--text-muted); font-size: 14px; cursor: pointer; font-family: inherit; font-weight: 500; transition: all .15s; }
+  .subtab.active { background: var(--orange); color: white; border-color: var(--orange); }
+  .subtab:hover:not(.active) { background: var(--orange-light); color: var(--orange-dark); border-color: var(--orange); }
+  .req-hdr { display: grid; grid-template-columns: 110px 1fr 120px 1fr 130px 36px; gap: 6px; margin-bottom: 4px; }
+  .req-hdr span { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; padding: 0 3px; }
+  .req-fila { display: grid; grid-template-columns: 110px 1fr 120px 1fr 130px 36px; gap: 6px; margin-bottom: 6px; align-items: center; }
+  .req-fila input, .req-fila select { padding: 7px 9px; font-size: 13px; border: 1px solid var(--border-strong); border-radius: var(--radius-sm); font-family: inherit; color: var(--text); background: var(--surface); width: 100%; }
+  .metrics { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-bottom: 22px; }
+  .metric { background: var(--surface); border: 1px solid var(--border); border-top: 3px solid var(--orange); border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow); }
+  .mv { font-size: 28px; font-weight: 700; } .ml { font-size: 13px; color: var(--text-muted); margin-top: 3px; }
   .table-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
   table { width: 100%; border-collapse: collapse; font-size: 14px; }
   thead { background: var(--bg); }
   th { text-align: left; font-size: 12px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: .05em; padding: 10px 14px; border-bottom: 1px solid var(--border); }
   td { padding: 11px 14px; border-bottom: 1px solid var(--border); vertical-align: middle; }
-  tr:last-child td { border-bottom: none; }
-  tr:hover td { background: #FFFBEB; }
-  .empty-state { text-align: center; padding: 50px 20px; color: var(--text-muted); }
-  .empty-state svg { width: 40px; height: 40px; margin: 0 auto 12px; display: block; opacity: .4; }
-
-  /* ACTA REQ - tabla filas */
-  .req-fila { display: grid; grid-template-columns: 100px 1fr 120px 1fr 130px 36px; gap: 6px; margin-bottom: 6px; align-items: center; }
-  .req-fila input, .req-fila select { margin: 0; }
-  .req-header { display: grid; grid-template-columns: 100px 1fr 120px 1fr 130px 36px; gap: 6px; margin-bottom: 4px; }
-  .req-header span { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; padding: 0 4px; }
-
-  /* SUBTABS */
-  .subtabs { display: flex; gap: 8px; margin-bottom: 20px; }
-  .subtab { padding: 8px 16px; border-radius: var(--radius-sm); border: 1px solid var(--border-strong); background: transparent; color: var(--text-muted); font-size: 14px; cursor: pointer; font-family: inherit; font-weight: 500; transition: all .15s; }
-  .subtab.active { background: var(--orange); color: white; border-color: var(--orange); }
-  .subtab:hover:not(.active) { background: var(--orange-light); color: var(--orange-dark); border-color: var(--orange); }
-
-  /* FILTER ROW */
+  tr:last-child td { border-bottom: none; } tr:hover td { background: #FFFBEB; }
+  .empty { text-align: center; padding: 48px 20px; color: var(--text-muted); font-size: 14px; }
   .filter-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
-  .filter-row select { padding: 7px 12px; border: 1px solid var(--border-strong); border-radius: var(--radius-sm); font-size: 13px; color: var(--text); background: var(--surface); }
-
-  /* ICON BUTTON */
-  .icon-btn { background: none; border: none; cursor: pointer; color: var(--text-muted); padding: 5px 7px; border-radius: var(--radius-sm); transition: all .15s; display: inline-flex; align-items: center; }
+  .filter-row select { padding: 7px 12px; border: 1px solid var(--border-strong); border-radius: var(--radius-sm); font-size: 13px; color: var(--text); background: var(--surface); font-family: inherit; }
+  .icon-btn { background: none; border: none; cursor: pointer; color: var(--text-muted); padding: 5px 7px; border-radius: var(--radius-sm); transition: all .15s; font-size: 16px; }
   .icon-btn:hover { background: var(--bg); color: var(--text); }
-  .icon-btn svg { width: 16px; height: 16px; }
-
-  /* TOAST */
+  hr { border: none; border-top: 1px solid var(--border); margin: 18px 0; }
+  .loading { display: none; align-items: center; gap: 10px; color: var(--text-muted); font-size: 14px; margin-top: 14px; }
+  .spinner { width: 18px; height: 18px; border: 2px solid var(--border); border-top-color: var(--orange); border-radius: 50%; animation: spin .7s linear infinite; flex-shrink: 0; }
+  @keyframes spin { to { transform: rotate(360deg); } }
   .toast { position: fixed; bottom: 24px; right: 24px; background: #111827; color: white; padding: 12px 20px; border-radius: var(--radius); font-size: 14px; z-index: 1000; opacity: 0; transform: translateY(10px); transition: all .25s; pointer-events: none; }
   .toast.show { opacity: 1; transform: translateY(0); }
-
-  /* SOPORTE - respuesta */
-  .tag { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; padding: 5px 12px; border-radius: 20px; }
-  .tag-dev { background: #FEF3C7; color: #92400E; }
-  .tag-sop { background: #DBEAFE; color: #1E40AF; }
-  .tag-cap { background: #D1FAE5; color: #065F46; }
-
-  @media (max-width: 768px) {
-    .sidebar { display: none; }
-    .main { margin-left: 0; max-width: 100%; padding: 16px; }
-    .form-grid-2, .form-grid-3, .form-grid-5, .metrics-grid { grid-template-columns: 1fr; }
-  }
+  @media(max-width:768px){ .sidebar{display:none} .main{margin-left:0;padding:16px} .g2,.g3,.g5,.metrics{grid-template-columns:1fr} }
 </style>
 </head>
 <body>
-
 <div class="layout">
-  <!-- SIDEBAR -->
-  <aside class="sidebar">
-    <div class="sidebar-logo">
-      <div class="brand">Qrystalos</div>
-      <div class="sub">Support Hub</div>
-      <div class="ix-badge">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        IX Colombia SAS
+
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <div class="brand">Qrystalos</div>
+    <div class="sub">Support Hub</div>
+    <div class="ix-badge">🛡 IX Colombia SAS</div>
+  </div>
+  <nav class="nav">
+    <button class="nav-item active" onclick="goTo('soporte',this)">💬 Soporte online</button>
+    <button class="nav-item" onclick="goTo('actas',this)">📋 Generar acta</button>
+    <button class="nav-item" onclick="goTo('seguimiento',this)">✅ Seguimiento <span class="nav-badge" id="nav-badge">0</span></button>
+  </nav>
+  <div class="sidebar-footer">
+    <label class="api-label">🔑 Gemini API Key (gratis)</label>
+    <input class="api-input" type="password" id="api-input" placeholder="AIza..."/>
+    <button class="api-btn" onclick="saveKey()">Guardar clave</button>
+    <div class="api-status" id="api-status"></div>
+  </div>
+</aside>
+
+<main class="main">
+
+  <!-- SOPORTE -->
+  <div id="page-soporte" class="page active">
+    <div class="page-header">
+      <div class="page-title">Soporte online</div>
+      <div class="page-sub">Analiza el caso con IA y obtén clasificación + respuesta lista para MessageBird</div>
+    </div>
+    <div class="card">
+      <div class="card-title">💬 Datos del caso</div>
+      <div class="g2">
+        <div class="fg"><label>Cliente / IPS</label><input id="s-cli" placeholder="Ej: Clínica San Rafael"/></div>
+        <div class="fg"><label>Módulo de Qrystalos</label>
+          <select id="s-mod">
+            <option value="">Selecciona el módulo...</option>
+            <option>Facturación</option><option>Historia clínica</option><option>Agenda / citas</option>
+            <option>Contabilidad</option><option>Caja</option><option>Recursos humanos</option>
+            <option>RIPS</option><option>FEIVS</option><option>DIAN / factura electrónica</option>
+            <option>SOAT</option><option>Odontograma</option><option>Fórmulas médicas</option>
+            <option>Enfermería</option><option>Consulta externa</option><option>CUPS</option><option>Otro</option>
+          </select>
+        </div>
+      </div>
+      <div class="fg"><label>Descripción del problema (pega el mensaje del cliente)</label>
+        <textarea id="s-desc" rows="5" placeholder="Pega aquí el mensaje tal como lo envió el cliente desde MessageBird..."></textarea>
+      </div>
+      <div class="btn-row">
+        <button class="btn btn-primary" onclick="analizarCaso()">✨ Analizar con IA</button>
+      </div>
+      <div class="loading" id="s-load"><div class="spinner"></div> Analizando el caso...</div>
+    </div>
+
+    <div id="s-res" style="display:none">
+      <div class="card">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+          <div class="card-title" style="margin-bottom:0">Resultado del análisis</div>
+          <div id="s-tag"></div>
+        </div>
+        <div style="margin-bottom:14px">
+          <p style="font-size:12px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px">Diagnóstico y pasos a verificar</p>
+          <div id="s-diag" style="font-size:14px;line-height:1.7"></div>
+        </div>
+        <div>
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+            <p style="font-size:12px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.05em">Respuesta sugerida para MessageBird</p>
+            <button class="btn btn-sm" onclick="copiar('s-resp',this)">📋 Copiar</button>
+          </div>
+          <div id="s-resp" style="background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px;font-size:14px;line-height:1.7;white-space:pre-wrap"></div>
+        </div>
+        <hr/>
+        <div class="btn-row">
+          <button class="btn btn-sm" onclick="guardarCaso('soporte')">💾 Guardar — soporte</button>
+          <button class="btn btn-sm" onclick="guardarCaso('desarrollo')">🛠 Enviar a desarrollo</button>
+          <button class="btn btn-sm" onclick="guardarCaso('capacitacion')">🎓 Capacitación al cliente</button>
+        </div>
       </div>
     </div>
-    <nav class="nav">
-      <button class="nav-item active" onclick="goTo('soporte', this)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-        Soporte online
-      </button>
-      <button class="nav-item" onclick="goTo('actas', this)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-        Generar acta
-      </button>
-      <button class="nav-item" onclick="goTo('seguimiento', this)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-        Seguimiento
-        <span class="nav-badge" id="nav-badge" style="display:none">0</span>
-      </button>
-    </nav>
-    <div class="sidebar-footer">
-      <div class="api-key-section">
-        <label>🔑 Anthropic API Key</label>
-        <input type="password" id="api-key-input" placeholder="sk-ant-..." />
-        <button class="api-save-btn" onclick="saveApiKey()">Guardar clave</button>
-        <div class="api-status" id="api-status"></div>
-      </div>
+  </div>
+
+  <!-- ACTAS -->
+  <div id="page-actas" class="page">
+    <div class="page-header">
+      <div class="page-title">Generar acta</div>
+      <div class="page-sub">Llena el formulario y la IA redacta el acta lista para copiar a Word</div>
     </div>
-  </aside>
+    <div class="subtabs">
+      <button class="subtab active" onclick="switchSub('req',this)">📋 Acta de requerimiento</button>
+      <button class="subtab" onclick="switchSub('act',this)">🗓 Acta de actividad</button>
+    </div>
 
-  <!-- MAIN CONTENT -->
-  <main class="main">
-
-    <!-- ═══ SOPORTE ═══ -->
-    <div id="page-soporte" class="page active">
-      <div class="page-header">
-        <div class="page-title">Soporte online</div>
-        <div class="page-sub">Analiza el caso del cliente con IA y obtén clasificación + respuesta lista</div>
+    <!-- REQ -->
+    <div id="sub-req">
+      <div class="card">
+        <div class="card-title">📄 Datos generales — FO-QA-01 V03</div>
+        <div class="g2">
+          <div class="fg"><label>Fecha</label><input type="date" id="r-fecha"/></div>
+          <div class="fg"><label>Cliente / IPS</label><input id="r-cli" placeholder="Ej: IPS Salud Total S.A.S."/></div>
+        </div>
+        <div class="g2">
+          <div class="fg"><label>Proyecto</label><input id="r-proy" placeholder="Ej: Implementación módulo RIPS 2026"/></div>
+          <div class="fg"><label>Versión del software</label><input id="r-ver" placeholder="Ej: 1.6"/></div>
+        </div>
+        <div class="fg"><label>Entorno de Test / URL</label><input id="r-url" placeholder="https://api-test.qrystalos.com/#/"/></div>
       </div>
       <div class="card">
-        <div class="card-title">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-          Datos del caso
+        <div class="card-title">✔️ Detalle de requerimientos</div>
+        <div class="req-hdr">
+          <span>ID Req.</span><span>Descripción</span><span>Resultado</span><span>Usuario final</span><span>Fecha</span><span></span>
         </div>
-        <div class="form-grid-2">
-          <div class="fg"><label>Cliente / IPS</label><input id="s-cli" placeholder="Ej: Clínica San Rafael"/></div>
-          <div class="fg"><label>Módulo de Qrystalos</label>
-            <select id="s-mod">
-              <option value="">Selecciona el módulo...</option>
-              <option>Facturación</option><option>Historia clínica</option><option>Agenda / citas</option>
-              <option>Contabilidad</option><option>Caja</option><option>Recursos humanos</option>
-              <option>RIPS</option><option>FEIVS</option><option>DIAN / factura electrónica</option>
-              <option>SOAT</option><option>Odontograma</option><option>Fórmulas médicas</option>
-              <option>Enfermería</option><option>Consulta externa</option><option>CUPS</option><option>Otro</option>
-            </select>
+        <div id="r-filas">
+          <div class="req-fila">
+            <input placeholder="REQ-001" class="rq-id"/>
+            <input placeholder="Descripción del requerimiento"/>
+            <select class="rq-res"><option>Aprobado</option><option>Cancelado</option></select>
+            <input placeholder="Nombre usuario"/>
+            <input type="date" class="rq-fecha"/>
+            <button class="icon-btn" onclick="this.closest('.req-fila').remove()">🗑</button>
           </div>
         </div>
-        <div class="fg"><label>Descripción del problema (pega el mensaje del cliente)</label>
-          <textarea id="s-desc" rows="5" placeholder="Pega aquí el mensaje tal como lo envió el cliente desde MessageBird..."></textarea>
-        </div>
-        <div class="btn-row">
-          <button class="btn btn-primary" onclick="analizarCaso()">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-            Analizar con IA
-          </button>
-        </div>
-        <div class="loading" id="s-load"><div class="spinner"></div> Analizando el caso con IA...</div>
+        <button class="btn btn-sm" onclick="addFila()" style="margin-top:6px">➕ Agregar fila</button>
       </div>
-
-      <div id="s-res" style="display:none">
-        <div class="card">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
-            <div class="card-title" style="margin-bottom:0">Resultado del análisis</div>
-            <div id="s-tag"></div>
-          </div>
-          <div style="margin-bottom:14px">
-            <p style="font-size:12px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px">Diagnóstico</p>
-            <div id="s-diag" style="font-size:14px;line-height:1.7;color:var(--text)"></div>
-          </div>
-          <div>
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
-              <p style="font-size:12px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.05em">Respuesta sugerida para MessageBird</p>
-              <button class="btn btn-sm" onclick="copiarTexto('s-resp', this)">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                Copiar
-              </button>
-            </div>
-            <div id="s-resp" style="background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px;font-size:14px;line-height:1.7;white-space:pre-wrap"></div>
-          </div>
-          <hr/>
-          <div class="btn-row">
-            <button class="btn btn-sm" onclick="guardarCaso('soporte')">💾 Guardar — soporte</button>
-            <button class="btn btn-sm" onclick="guardarCaso('desarrollo')">🛠 Enviar a desarrollo</button>
-            <button class="btn btn-sm" onclick="guardarCaso('capacitacion')">🎓 Capacitación al cliente</button>
+      <div class="card">
+        <div class="card-title">📝 Observaciones</div>
+        <div class="fg"><label>Actividad ID y descripción del desarrollo</label>
+          <textarea id="r-obs" rows="3" placeholder="Ej: Actividad ID 402 – Solicitud por el cliente. Descripción del desarrollo realizado..."></textarea>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">👥 Equipo Responsable IX</div>
+        <div class="g5">
+          <div class="fg" style="margin-bottom:0"><label>Desarrollo</label><input id="r-dev" placeholder="Nombre"/></div>
+          <div class="fg" style="margin-bottom:0"><label>QA</label><input id="r-qa" placeholder="Nombre"/></div>
+          <div class="fg" style="margin-bottom:0"><label>Soporte</label><input id="r-sop" placeholder="Tu nombre"/></div>
+          <div class="fg" style="margin-bottom:0"><label>Despliegue</label><input id="r-des" placeholder="Nombre"/></div>
+          <div class="fg" style="margin-bottom:0"><label>Gerente Proyecto</label><input id="r-ger" placeholder="Nombre"/></div>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn btn-primary" onclick="generarActaReq()">✨ Generar acta con IA</button>
+        <button class="btn" onclick="limpiarReq()">🔄 Limpiar</button>
+      </div>
+      <div class="loading" id="r-load"><div class="spinner"></div> Redactando el acta de requerimiento...</div>
+      <div id="r-res" style="display:none">
+        <div class="result-hdr">
+          <p>Acta de requerimiento — lista para copiar a Word</p>
+          <div style="display:flex;gap:8px">
+            <button class="btn btn-sm" onclick="copiar('r-txt',this)">📋 Copiar todo</button>
+            <button class="btn btn-sm btn-primary" onclick="guardarActa('req')">💾 Seguimiento</button>
           </div>
         </div>
+        <div id="r-txt" class="result-box"></div>
       </div>
     </div>
 
-    <!-- ═══ ACTAS ═══ -->
-    <div id="page-actas" class="page">
-      <div class="page-header">
-        <div class="page-title">Generar acta</div>
-        <div class="page-sub">Llena el formulario y la IA redacta el acta lista para copiar a Word</div>
-      </div>
-      <div class="subtabs">
-        <button class="subtab active" onclick="switchSubtab('req', this)">📋 Acta de requerimiento</button>
-        <button class="subtab" onclick="switchSubtab('act', this)">🗓 Acta de actividad</button>
-      </div>
-
-      <!-- ACTA REQUERIMIENTO -->
-      <div id="sub-req">
-        <div class="card">
-          <div class="card-title">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-            Datos generales — FO-QA-01 V03
-          </div>
-          <div class="form-grid-2">
-            <div class="fg"><label>Fecha</label><input type="date" id="r-fecha"/></div>
-            <div class="fg"><label>Cliente / IPS</label><input id="r-cli" placeholder="Ej: IPS Salud Total S.A.S."/></div>
-          </div>
-          <div class="form-grid-2">
-            <div class="fg"><label>Proyecto</label><input id="r-proy" placeholder="Ej: Implementación módulo RIPS 2026"/></div>
-            <div class="fg"><label>Versión del software</label><input id="r-ver" placeholder="Ej: 1.6"/></div>
-          </div>
-          <div class="fg"><label>Entorno de Test / URL</label><input id="r-url" placeholder="https://api-test.qrystalos.com/#/"/></div>
+    <!-- ACT -->
+    <div id="sub-act" style="display:none">
+      <div class="card">
+        <div class="card-title">🗓 Fecha y datos del soporte</div>
+        <div class="g3">
+          <div class="fg"><label>Día</label><input id="a-dia" placeholder="07"/></div>
+          <div class="fg"><label>Mes</label><input id="a-mes" placeholder="Mayo"/></div>
+          <div class="fg"><label>Año</label><input id="a-ano" placeholder="2026"/></div>
         </div>
-
-        <div class="card">
-          <div class="card-title">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-            Detalle de requerimientos
-          </div>
-          <div class="req-header">
-            <span>ID Req.</span><span>Descripción</span><span>Resultado</span><span>Usuario final</span><span>Fecha</span><span></span>
-          </div>
-          <div id="r-filas">
-            <div class="req-fila">
-              <input placeholder="REQ-001" class="rq-id" style="padding:7px 9px;font-size:13px"/>
-              <input placeholder="Descripción del requerimiento" style="padding:7px 9px;font-size:13px"/>
-              <select class="rq-res" style="padding:7px 9px;font-size:13px"><option>Aprobado</option><option>Cancelado</option></select>
-              <input placeholder="Nombre usuario" style="padding:7px 9px;font-size:13px"/>
-              <input type="date" class="rq-fecha" style="padding:7px 9px;font-size:13px"/>
-              <button class="icon-btn" onclick="this.closest('.req-fila').remove()" title="Eliminar fila">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
-              </button>
-            </div>
-          </div>
-          <button class="btn btn-sm" onclick="addFila()" style="margin-top:6px">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-            Agregar fila
-          </button>
+        <div class="g2">
+          <div class="fg"><label>Proyecto</label><input id="a-proy" placeholder="Ej: Soporte módulo facturación"/></div>
+          <div class="fg"><label>Ciudad</label><input id="a-ciu" placeholder="Ej: Barranquilla"/></div>
         </div>
-
-        <div class="card">
-          <div class="card-title">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-            Observaciones
-          </div>
-          <div class="fg">
-            <label>Actividad ID y descripción del desarrollo realizado</label>
-            <textarea id="r-obs" rows="3" placeholder="Ej: Actividad ID 402 – Solicitud por el cliente. Descripción y explicación del desarrollo realizado o la cancelación del mismo..."></textarea>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-title">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-            Equipo Responsable IX
-          </div>
-          <div class="form-grid-5">
-            <div class="fg" style="margin-bottom:0"><label>Desarrollo</label><input id="r-dev" placeholder="Nombre"/></div>
-            <div class="fg" style="margin-bottom:0"><label>QA</label><input id="r-qa" placeholder="Nombre"/></div>
-            <div class="fg" style="margin-bottom:0"><label>Soporte</label><input id="r-sop" placeholder="Tu nombre"/></div>
-            <div class="fg" style="margin-bottom:0"><label>Despliegue</label><input id="r-des" placeholder="Nombre"/></div>
-            <div class="fg" style="margin-bottom:0"><label>Gerente Proyecto</label><input id="r-ger" placeholder="Nombre"/></div>
-          </div>
-        </div>
-
-        <div class="btn-row">
-          <button class="btn btn-primary" onclick="generarActaReq()">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-            Generar acta con IA
-          </button>
-          <button class="btn" onclick="limpiarReq()">Limpiar formulario</button>
-        </div>
-        <div class="loading" id="r-load"><div class="spinner"></div> Redactando el acta de requerimiento...</div>
-        <div id="r-res" style="display:none">
-          <div class="result-header">
-            <p>Acta de requerimiento — lista para copiar a Word</p>
-            <div style="display:flex;gap:8px">
-              <button class="btn btn-sm" onclick="copiarTexto('r-txt', this)">📋 Copiar todo</button>
-              <button class="btn btn-sm btn-primary" onclick="guardarActa('req')">💾 Agregar al seguimiento</button>
-            </div>
-          </div>
-          <div id="r-txt" class="result-box"></div>
+        <div class="g2">
+          <div class="fg"><label>Ingeniero asignado de soporte</label><input id="a-ing" placeholder="Tu nombre"/></div>
+          <div class="fg"><label>Duración</label><input id="a-dur" placeholder="Ej: 2 horas"/></div>
         </div>
       </div>
-
-      <!-- ACTA ACTIVIDAD -->
-      <div id="sub-act" style="display:none">
-        <div class="card">
-          <div class="card-title">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-            Fecha y datos del soporte
-          </div>
-          <div class="form-grid-3">
-            <div class="fg"><label>Día</label><input id="a-dia" placeholder="Ej: 07"/></div>
-            <div class="fg"><label>Mes</label><input id="a-mes" placeholder="Ej: Mayo"/></div>
-            <div class="fg"><label>Año</label><input id="a-ano" placeholder="Ej: 2026"/></div>
-          </div>
-          <div class="form-grid-2">
-            <div class="fg"><label>Proyecto</label><input id="a-proy" placeholder="Ej: Soporte módulo facturación"/></div>
-            <div class="fg"><label>Ciudad</label><input id="a-ciu" placeholder="Ej: Barranquilla"/></div>
-          </div>
-          <div class="form-grid-2">
-            <div class="fg"><label>Ingeniero asignado de soporte</label><input id="a-ing" placeholder="Tu nombre"/></div>
-            <div class="fg"><label>Duración</label><input id="a-dur" placeholder="Ej: 2 horas"/></div>
+      <div class="card">
+        <div class="card-title">📋 Actividades</div>
+        <div class="fg"><label>Actividades realizadas</label>
+          <textarea id="a-real" rows="4" placeholder="Describe detalladamente las actividades realizadas..."></textarea>
+        </div>
+        <div class="fg"><label>Actividades pendientes</label>
+          <textarea id="a-pend" rows="3" placeholder="Describe las actividades pendientes, o escribe 'Ninguna'..."></textarea>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">✍️ Firmas</div>
+        <div class="g2">
+          <div class="fg"><label>Nombre — IX Colombia SAS</label><input id="a-fir1" placeholder="Tu nombre completo"/></div>
+          <div class="fg"><label>Nombre — representante del cliente</label><input id="a-fir2" placeholder="Nombre del cliente"/></div>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn btn-primary" onclick="generarActaAct()">✨ Generar acta con IA</button>
+        <button class="btn" onclick="limpiarAct()">🔄 Limpiar</button>
+      </div>
+      <div class="loading" id="a-load"><div class="spinner"></div> Redactando el acta de actividad...</div>
+      <div id="a-res" style="display:none">
+        <div class="result-hdr">
+          <p>Acta de actividad — lista para copiar a Word</p>
+          <div style="display:flex;gap:8px">
+            <button class="btn btn-sm" onclick="copiar('a-txt',this)">📋 Copiar todo</button>
+            <button class="btn btn-sm btn-primary" onclick="guardarActa('act')">💾 Seguimiento</button>
           </div>
         </div>
-        <div class="card">
-          <div class="card-title">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
-            Actividades
-          </div>
-          <div class="fg"><label>Actividades realizadas</label>
-            <textarea id="a-real" rows="4" placeholder="Describe detalladamente las actividades realizadas durante el soporte..."></textarea>
-          </div>
-          <div class="fg"><label>Actividades pendientes</label>
-            <textarea id="a-pend" rows="3" placeholder="Describe las actividades que quedaron pendientes, o escribe 'Ninguna'..."></textarea>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-title">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-            Firmas
-          </div>
-          <div class="form-grid-2">
-            <div class="fg"><label>Nombre — IX Colombia SAS</label><input id="a-fir1" placeholder="Tu nombre completo"/></div>
-            <div class="fg"><label>Nombre — representante del cliente</label><input id="a-fir2" placeholder="Nombre del cliente que recibe"/></div>
-          </div>
-        </div>
-        <div class="btn-row">
-          <button class="btn btn-primary" onclick="generarActaAct()">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-            Generar acta con IA
-          </button>
-          <button class="btn" onclick="limpiarAct()">Limpiar formulario</button>
-        </div>
-        <div class="loading" id="a-load"><div class="spinner"></div> Redactando el acta de actividad...</div>
-        <div id="a-res" style="display:none">
-          <div class="result-header">
-            <p>Acta de actividad — lista para copiar a Word</p>
-            <div style="display:flex;gap:8px">
-              <button class="btn btn-sm" onclick="copiarTexto('a-txt', this)">📋 Copiar todo</button>
-              <button class="btn btn-sm btn-primary" onclick="guardarActa('act')">💾 Agregar al seguimiento</button>
-            </div>
-          </div>
-          <div id="a-txt" class="result-box"></div>
-        </div>
+        <div id="a-txt" class="result-box"></div>
       </div>
     </div>
+  </div>
 
-    <!-- ═══ SEGUIMIENTO ═══ -->
-    <div id="page-seguimiento" class="page">
-      <div class="page-header">
-        <div class="page-title">Seguimiento</div>
-        <div class="page-sub">Registro de casos atendidos y estado de actas</div>
-      </div>
-      <div class="metrics-grid">
-        <div class="metric-card metric-accent"><div class="metric-val" id="m-tot">0</div><div class="metric-lbl">total registros</div></div>
-        <div class="metric-card metric-accent"><div class="metric-val" id="m-pen">0</div><div class="metric-lbl">actas pendientes de firma</div></div>
-        <div class="metric-card metric-accent"><div class="metric-val" id="m-dev">0</div><div class="metric-lbl">enviados a desarrollo</div></div>
-      </div>
-      <div class="filter-row">
-        <p style="font-size:14px;font-weight:600">Registro de casos y actas</p>
-        <select id="filtro" onchange="renderTabla()">
-          <option value="">Todos los registros</option>
-          <option value="soporte">Soporte resuelto</option>
-          <option value="desarrollo">Enviados a desarrollo</option>
-          <option value="capacitacion">Capacitación</option>
-          <option value="req-pen">Actas req. — pendientes firma</option>
-          <option value="req-fir">Actas req. — firmadas</option>
-          <option value="act-pen">Actas act. — pendientes firma</option>
-          <option value="act-fir">Actas act. — firmadas</option>
-        </select>
-      </div>
-      <div id="tabla-wrap">
-        <div class="empty-state">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-          <p>Aún no hay registros.<br/>Analiza un caso o genera un acta para empezar.</p>
-        </div>
-      </div>
+  <!-- SEGUIMIENTO -->
+  <div id="page-seguimiento" class="page">
+    <div class="page-header">
+      <div class="page-title">Seguimiento</div>
+      <div class="page-sub">Registro de casos atendidos y estado de actas</div>
     </div>
+    <div class="metrics">
+      <div class="metric"><div class="mv" id="m-tot">0</div><div class="ml">total registros</div></div>
+      <div class="metric"><div class="mv" id="m-pen">0</div><div class="ml">actas pendientes de firma</div></div>
+      <div class="metric"><div class="mv" id="m-dev">0</div><div class="ml">enviados a desarrollo</div></div>
+    </div>
+    <div class="filter-row">
+      <p style="font-size:14px;font-weight:600">Registro de casos y actas</p>
+      <select id="filtro" onchange="renderTabla()">
+        <option value="">Todos</option>
+        <option value="soporte">Soporte resuelto</option>
+        <option value="desarrollo">Desarrollo</option>
+        <option value="capacitacion">Capacitación</option>
+        <option value="req-pen">Actas req. pendientes</option>
+        <option value="req-fir">Actas req. firmadas</option>
+        <option value="act-pen">Actas act. pendientes</option>
+        <option value="act-fir">Actas act. firmadas</option>
+      </select>
+    </div>
+    <div id="tabla-wrap"><div class="empty">📭 Aún no hay registros.<br>Guarda un caso o un acta para empezar.</div></div>
+  </div>
 
-  </main>
+</main>
 </div>
-
-<!-- TOAST -->
 <div class="toast" id="toast"></div>
 
 <script>
-// ─── STATE ───────────────────────────────────────────
-function parseStoredRecords() {
-  try {
-    const raw = localStorage.getItem('qrystaloshub_recs');
-    const parsed = JSON.parse(raw || '[]');
-    return Array.isArray(parsed) ? parsed : [];
-  } catch (_) {
-    return [];
-  }
-}
-let recs = parseStoredRecords();
-let apiKey = localStorage.getItem('qrystaloshub_key') || '';
+let recs = JSON.parse(localStorage.getItem('qhub_recs') || '[]');
+let apiKey = localStorage.getItem('qhub_gemini_key') || '';
 
-// ─── INIT ────────────────────────────────────────────
-(function init() {
-  if (apiKey) {
-    document.getElementById('api-key-input').value = '••••••••••••••••';
-    document.getElementById('api-status').textContent = '✓ Clave guardada';
-    document.getElementById('api-status').className = 'api-status ok';
-  }
-  actualizarMetricas();
-  const hoy = new Date().toISOString().split('T')[0];
+(function(){
   const rf = document.getElementById('r-fecha');
-  if (rf) rf.value = hoy;
+  if(rf) rf.value = new Date().toISOString().split('T')[0];
+  actualizarMetricas();
+  if(recs.length){ const nb=document.getElementById('nav-badge'); nb.style.display='inline'; nb.textContent=recs.length; }
+  if(apiKey){
+    document.getElementById('api-input').value='••••••••••••••••';
+    document.getElementById('api-status').textContent='✓ Clave guardada';
+    document.getElementById('api-status').className='api-status ok';
+  }
 })();
 
-// ─── NAV ─────────────────────────────────────────────
-function goTo(page, el) {
-  document.querySelectorAll('.nav-item').forEach(x => x.classList.remove('active'));
-  document.querySelectorAll('.page').forEach(x => x.classList.remove('active'));
-  el.classList.add('active');
-  document.getElementById('page-' + page).classList.add('active');
-  if (page === 'seguimiento') renderTabla();
-}
-
-function switchSubtab(t, el) {
-  document.querySelectorAll('.subtab').forEach(x => x.classList.remove('active'));
-  el.classList.add('active');
-  document.getElementById('sub-req').style.display = t === 'req' ? 'block' : 'none';
-  document.getElementById('sub-act').style.display = t === 'act' ? 'block' : 'none';
-}
-
-// ─── API KEY ─────────────────────────────────────────
-function saveApiKey() {
-  const val = document.getElementById('api-key-input').value.trim();
-  if (!val || val.startsWith('•')) { showToast('Ingresa una clave válida'); return; }
-  if (!val.startsWith('sk-ant-')) { showToast('La clave debe empezar con sk-ant-'); return; }
-  apiKey = val;
-  localStorage.setItem('qrystaloshub_key', val);
-  document.getElementById('api-key-input').value = '••••••••••••••••';
-  document.getElementById('api-status').textContent = '✓ Clave guardada correctamente';
-  document.getElementById('api-status').className = 'api-status ok';
+function saveKey(){
+  const v=document.getElementById('api-input').value.trim();
+  if(!v||v.startsWith('•')){showToast('Ingresa una clave válida');return;}
+  apiKey=v;
+  localStorage.setItem('qhub_gemini_key',v);
+  document.getElementById('api-input').value='••••••••••••••••';
+  document.getElementById('api-status').textContent='✓ Clave guardada';
+  document.getElementById('api-status').className='api-status ok';
   showToast('API key guardada ✓');
 }
 
-// ─── CLAUDE ──────────────────────────────────────────
-async function callClaude(prompt) {
-  if (!apiKey) throw new Error('Sin API key');
-  const res = await fetch('https://api.anthropic.com/v1/messages', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'x-api-key': apiKey,
-      'anthropic-version': '2023-06-01',
-      'anthropic-dangerous-direct-browser-access': 'true'
-    },
-    body: JSON.stringify({
-      model: 'claude-opus-4-5',
-      max_tokens: 1500,
-      system: `Eres asistente de soporte técnico experto en Qrystalos, sistema de gestión médica de IX Colombia SAS. 
-Conoces todos sus módulos: facturación, historia clínica, agenda/citas, contabilidad, caja, recursos humanos, RIPS, FEIVS, DIAN/factura electrónica, SOAT, odontograma, fórmulas médicas, enfermería, consulta externa, CUPS.
-Respondes siempre en español formal colombiano. Solo texto plano sin asteriscos, sin markdown, sin corchetes ni símbolos especiales.`,
-      messages: [{ role: 'user', content: prompt }]
+// GEMINI API
+async function callGemini(prompt){
+  if(!apiKey) throw new Error('Sin API key — ingresa tu clave de Gemini en el panel izquierdo');
+  const url=`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+  const res=await fetch(url,{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({
+      contents:[{parts:[{text:`Eres asistente de soporte técnico experto en Qrystalos, sistema de gestión médica de IX Colombia SAS. Conoces todos sus módulos: facturación, historia clínica, agenda/citas, contabilidad, caja, recursos humanos, RIPS, FEIVS, DIAN/factura electrónica, SOAT, odontograma, fórmulas médicas, enfermería, consulta externa, CUPS. Responde siempre en español formal colombiano. Solo texto plano sin asteriscos, sin markdown, sin corchetes.\n\n${prompt}`}]}],
+      generationConfig:{temperature:0.7,maxOutputTokens:1500}
     })
   });
-  if (!res.ok) {
-    let msg = 'Error API';
-    try {
-      const err = await res.json();
-      msg = err.error?.message || msg;
-    } catch (_) {
-      msg = `${msg} (${res.status})`;
-    }
-    throw new Error(msg);
-  }
-  const data = await res.json();
-  return data.content?.map(b => b.text || '').join('') || '';
+  if(!res.ok){const e=await res.json();throw new Error(e.error?.message||'Error Gemini API');}
+  const data=await res.json();
+  return data.candidates?.[0]?.content?.parts?.[0]?.text||'No se pudo generar respuesta.';
 }
 
-// ─── SOPORTE ─────────────────────────────────────────
-async function analizarCaso() {
-  if (!apiKey) { showToast('⚠ Ingresa tu API key primero'); return; }
-  const desc = document.getElementById('s-desc').value.trim();
-  if (!desc) { showToast('Describe el problema del cliente'); return; }
-  const cli = document.getElementById('s-cli').value.trim();
-  const mod = document.getElementById('s-mod').value;
+// NAV
+function goTo(p,el){
+  document.querySelectorAll('.nav-item').forEach(x=>x.classList.remove('active'));
+  document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('page-'+p).classList.add('active');
+  if(p==='seguimiento') renderTabla();
+}
+function switchSub(t,el){
+  document.querySelectorAll('.subtab').forEach(x=>x.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('sub-req').style.display=t==='req'?'block':'none';
+  document.getElementById('sub-act').style.display=t==='act'?'block':'none';
+}
 
-  setLoading('s-load', true);
-  document.getElementById('s-res').style.display = 'none';
+// SOPORTE
+async function analizarCaso(){
+  const desc=document.getElementById('s-desc').value.trim();
+  if(!desc){showToast('Describe el problema del cliente');return;}
+  const cli=document.getElementById('s-cli').value.trim();
+  const mod=document.getElementById('s-mod').value;
+  setLoad('s-load',true);
+  document.getElementById('s-res').style.display='none';
+  const prompt=`Analiza este caso de soporte de Qrystalos. Responde con este formato exacto sin asteriscos:
 
-  const prompt = `Analiza este caso de soporte de Qrystalos. Responde con este formato exacto, sin asteriscos:
-
-CLASIFICACION: [una sola palabra: SOPORTE o DESARROLLO o CAPACITACION]
+CLASIFICACION: [solo una: SOPORTE o DESARROLLO o CAPACITACION]
 
 DIAGNOSTICO:
-[2 o 3 oraciones explicando qué puede estar ocurriendo y las posibles causas técnicas]
+[2 o 3 oraciones sobre posibles causas]
 
 PASOS:
-1. [primer paso a verificar]
+1. [primer paso]
 2. [segundo paso]
 3. [tercer paso]
 4. [cuarto paso si aplica]
 
 RESPUESTA AL CLIENTE:
-[Mensaje completo listo para copiar en MessageBird. Tono amable y profesional. Entre 3 y 5 oraciones. Saluda al cliente, explica qué se hará y da un siguiente paso claro.]
+[Mensaje listo para copiar en MessageBird. Tono amable y profesional. 3 a 5 oraciones.]
 
 ---
-Cliente: ${cli || 'No especificado'}
-Módulo: ${mod || 'No especificado'}
-Problema reportado: ${desc}`;
-
-  try {
-    const txt = await callClaude(prompt);
-    const clf = (txt.match(/CLASIFICACION:\s*(\w+)/i)?.[1] || 'SOPORTE').toUpperCase();
-    const diag = txt.match(/DIAGNOSTICO:([\s\S]*?)(?:PASOS:|$)/i)?.[1]?.trim() || '';
-    const pasos = txt.match(/PASOS:([\s\S]*?)(?:RESPUESTA|$)/i)?.[1]?.trim() || '';
-    const resp = txt.match(/RESPUESTA AL CLIENTE:([\s\S]*?)(?:---|$)/i)?.[1]?.trim() || '';
-
-    const tagClass = clf === 'DESARROLLO' ? 'tag-dev' : clf === 'CAPACITACION' ? 'tag-cap' : 'tag-sop';
-    const tagLabel = clf === 'DESARROLLO' ? '🛠 Enviar a desarrollo' : clf === 'CAPACITACION' ? '🎓 Requiere capacitación' : '✅ Lo resuelve soporte';
-
-    document.getElementById('s-tag').innerHTML = `<span class="tag ${tagClass}">${tagLabel}</span>`;
-    document.getElementById('s-diag').innerHTML = `<p style="margin-bottom:8px">${diag.replace(/\n/g,'<br>')}</p><p style="color:var(--text-muted);font-size:13px;white-space:pre-wrap">${pasos}</p>`;
-    document.getElementById('s-resp').textContent = resp;
-
-    const rd = document.getElementById('s-res').dataset;
-    rd.clf = clf.toLowerCase(); rd.cli = cli; rd.mod = mod;
-    document.getElementById('s-res').style.display = 'block';
-  } catch(e) {
-    showToast('Error: ' + e.message);
-  }
-  setLoading('s-load', false);
+Cliente: ${cli||'No especificado'}
+Módulo: ${mod||'No especificado'}
+Problema: ${desc}`;
+  try{
+    const txt=await callGemini(prompt);
+    const clf=(txt.match(/CLASIFICACION:\s*(\w+)/i)?.[1]||'SOPORTE').toUpperCase();
+    const diag=txt.match(/DIAGNOSTICO:([\s\S]*?)(?:PASOS:|$)/i)?.[1]?.trim()||'';
+    const pasos=txt.match(/PASOS:([\s\S]*?)(?:RESPUESTA|$)/i)?.[1]?.trim()||'';
+    const resp=txt.match(/RESPUESTA AL CLIENTE:([\s\S]*?)(?:---|$)/i)?.[1]?.trim()||'';
+    const tagCls=clf==='DESARROLLO'?'background:#FEF3C7;color:#92400E':clf==='CAPACITACION'?'background:#D1FAE5;color:#065F46':'background:#DBEAFE;color:#1E40AF';
+    const tagTxt=clf==='DESARROLLO'?'🛠 Enviar a desarrollo':clf==='CAPACITACION'?'🎓 Capacitación':'✅ Lo resuelve soporte';
+    document.getElementById('s-tag').innerHTML=`<span class="badge" style="${tagCls}">${tagTxt}</span>`;
+    document.getElementById('s-diag').innerHTML=`<p style="margin-bottom:8px">${diag.replace(/\n/g,'<br>')}</p><p style="color:var(--text-muted);font-size:13px;white-space:pre-wrap">${pasos}</p>`;
+    document.getElementById('s-resp').textContent=resp;
+    const rd=document.getElementById('s-res').dataset;
+    rd.clf=clf.toLowerCase();rd.cli=cli;rd.mod=mod;
+    document.getElementById('s-res').style.display='block';
+  }catch(e){showToast('Error: '+e.message);}
+  setLoad('s-load',false);
+}
+function guardarCaso(tipo){
+  const rd=document.getElementById('s-res').dataset;
+  push({tipo,subtipo:'Caso de soporte',cliente:rd.cli||document.getElementById('s-cli').value||'Sin especificar',modulo:document.getElementById('s-mod').value||'—',ref:'—',desc:document.getElementById('s-desc').value.substring(0,70)+'...',estado:tipo==='desarrollo'?'desarrollo':'resuelto'});
+  showToast('Caso guardado ✓');
 }
 
-function guardarCaso(tipo) {
-  const rd = document.getElementById('s-res').dataset;
-  push({
-    tipo, subtipo: 'Caso de soporte',
-    cliente: rd.cli || document.getElementById('s-cli').value || 'Sin especificar',
-    modulo: document.getElementById('s-mod').value || '—',
-    ref: '—',
-    desc: document.getElementById('s-desc').value.substring(0, 60) + '...',
-    estado: tipo === 'desarrollo' ? 'desarrollo' : 'resuelto'
-  });
-  showToast('Caso guardado en seguimiento ✓');
-}
-
-// ─── ACTA REQUERIMIENTO ───────────────────────────────
-function addFila() {
-  const d = document.getElementById('r-filas');
-  const row = document.createElement('div');
-  row.className = 'req-fila';
-  row.innerHTML = `
-    <input placeholder="REQ-00X" class="rq-id" style="padding:7px 9px;font-size:13px"/>
-    <input placeholder="Descripción" style="padding:7px 9px;font-size:13px"/>
-    <select class="rq-res" style="padding:7px 9px;font-size:13px"><option>Aprobado</option><option>Cancelado</option></select>
-    <input placeholder="Usuario final" style="padding:7px 9px;font-size:13px"/>
-    <input type="date" class="rq-fecha" style="padding:7px 9px;font-size:13px"/>
-    <button class="icon-btn" onclick="this.closest('.req-fila').remove()" title="Eliminar">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
-    </button>`;
+// ACTA REQ
+function addFila(){
+  const d=document.getElementById('r-filas');
+  const row=document.createElement('div');row.className='req-fila';
+  row.innerHTML='<input placeholder="REQ-00X" class="rq-id"/><input placeholder="Descripción"/><select class="rq-res"><option>Aprobado</option><option>Cancelado</option></select><input placeholder="Usuario final"/><input type="date" class="rq-fecha"/><button class="icon-btn" onclick="this.closest(\'.req-fila\').remove()">🗑</button>';
   d.appendChild(row);
 }
-
-function getFilas() {
-  return Array.from(document.querySelectorAll('.req-fila')).map(r => {
-    const ins = r.querySelectorAll('input, select');
-    return { id: ins[0].value, desc: ins[1].value, res: ins[2].value, usr: ins[3].value, fecha: ins[4].value };
-  }).filter(r => r.id || r.desc);
+function getFilas(){
+  return Array.from(document.querySelectorAll('.req-fila')).map(r=>{
+    const ins=r.querySelectorAll('input,select');
+    return{id:ins[0].value.trim(),desc:ins[1].value.trim(),res:ins[2].value,usr:ins[3].value.trim(),fecha:ins[4].value};
+  }).filter(r=>r.id||r.desc);
 }
-
-function limpiarReq() {
-  ['r-fecha','r-cli','r-proy','r-ver','r-url','r-obs','r-dev','r-qa','r-sop','r-des','r-ger'].forEach(id => {
-    const el = document.getElementById(id); if (el) el.value = '';
-  });
-  document.getElementById('r-filas').innerHTML = `<div class="req-fila">
-    <input placeholder="REQ-001" class="rq-id" style="padding:7px 9px;font-size:13px"/>
-    <input placeholder="Descripción del requerimiento" style="padding:7px 9px;font-size:13px"/>
-    <select class="rq-res" style="padding:7px 9px;font-size:13px"><option>Aprobado</option><option>Cancelado</option></select>
-    <input placeholder="Nombre usuario" style="padding:7px 9px;font-size:13px"/>
-    <input type="date" class="rq-fecha" style="padding:7px 9px;font-size:13px"/>
-    <button class="icon-btn" onclick="this.closest('.req-fila').remove()">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
-    </button></div>`;
-  document.getElementById('r-res').style.display = 'none';
-  document.getElementById('r-fecha').value = new Date().toISOString().split('T')[0];
+function limpiarReq(){
+  ['r-fecha','r-cli','r-proy','r-ver','r-url','r-obs','r-dev','r-qa','r-sop','r-des','r-ger'].forEach(id=>{const e=document.getElementById(id);if(e)e.value='';});
+  document.getElementById('r-filas').innerHTML='<div class="req-fila"><input placeholder="REQ-001" class="rq-id"/><input placeholder="Descripción"/><select class="rq-res"><option>Aprobado</option><option>Cancelado</option></select><input placeholder="Nombre usuario"/><input type="date" class="rq-fecha"/><button class="icon-btn" onclick="this.closest(\'.req-fila\').remove()">🗑</button></div>';
+  document.getElementById('r-res').style.display='none';
+  document.getElementById('r-fecha').value=new Date().toISOString().split('T')[0];
 }
-
-async function generarActaReq() {
-  if (!apiKey) { showToast('⚠ Ingresa tu API key primero'); return; }
-  const cli = document.getElementById('r-cli').value.trim();
-  if (!cli) { showToast('Ingresa el nombre del cliente'); return; }
-
-  setLoading('r-load', true);
-  document.getElementById('r-res').style.display = 'none';
-
-  const filas = getFilas();
-  const tablaStr = filas.length
-    ? filas.map(f => `  ID ${f.id}: ${f.desc} | Resultado: ${f.res} | Usuario: ${f.usr} | Fecha: ${f.fecha}`).join('\n')
-    : '  (Sin requerimientos registrados)';
-
-  const fecha = document.getElementById('r-fecha').value || new Date().toLocaleDateString('es-CO');
-
-  const prompt = `Redacta el texto completo del ACTA DE ACEPTACIÓN DE PRUEBAS DE USUARIO FINAL para Qrystalos (IX Colombia SAS).
-Usa lenguaje formal colombiano. Solo texto plano, sin asteriscos, sin markdown. Mayúsculas solo en títulos de sección.
+function fmtFecha(v){
+  if(!v)return'___';
+  const[y,m,d]=v.split('-');
+  const ms=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+  return`${parseInt(d)} de ${ms[parseInt(m)-1]} de ${y}`;
+}
+async function generarActaReq(){
+  const cli=document.getElementById('r-cli').value.trim();
+  if(!cli){showToast('Ingresa el nombre del cliente');return;}
+  setLoad('r-load',true);
+  document.getElementById('r-res').style.display='none';
+  const filas=getFilas();
+  const tablaStr=filas.length?filas.map(f=>`  ID ${f.id}: ${f.desc} | Resultado: ${f.res} | Usuario: ${f.usr} | Fecha: ${f.fecha?fmtFecha(f.fecha):'—'}`).join('\n'):'  (Sin requerimientos registrados)';
+  const prompt=`Redacta el texto completo del ACTA DE ACEPTACIÓN DE PRUEBAS DE USUARIO FINAL para Qrystalos (IX Colombia SAS).
+Solo texto plano, sin asteriscos ni markdown. Lenguaje formal colombiano. Mayúsculas solo en títulos de sección.
 
 Estructura exacta en este orden:
-1. ACTA DE ACEPTACIÓN DE PRUEBAS DE USUARIO FINAL
-2. Fecha: | Cliente: | Proyecto: | Software: Qrystalos | Versión: | Entorno de Test / URL:
-3. OBJETIVO / ALCANCE
-(párrafo: Dejar constancia de la aceptación de las pruebas de usuario final de los requerimientos solicitados por el Cliente para autorizar su despliegue al ambiente de producción.)
-4. DETALLE DE REQUERIMIENTOS PROBADOS Y ACEPTADOS CLIENTE
-(lista los requerimientos con su ID, descripción, resultado y usuario)
-5. OBSERVACIONES
-(incluye la actividad y descripción proporcionada)
-6. EQUIPO RESPONSABLE IX
-Desarrollo: | QA: | Soporte: | Despliegue: | Gerente de Proyecto:
-7. DECLARACIÓN DE LA ACEPTACIÓN FORMAL
-(párrafo formal indicando que de acuerdo con el resultado SATISFACTORIO de las Pruebas del Usuario Final, se procederá a realizar la implementación en el entorno de producción: http://qrystalos.com. Incluir nota sobre posible lentitud durante implementación y Ctrl+Shift+R)
-8. DATOS DE AUTORIZACIÓN
-Nombre y Apellido: _______________
-Cargo: _______________
-Fecha: _______________
+1. Encabezado: ACTA DE ACEPTACIÓN DE PRUEBAS DE USUARIO FINAL
+2. Datos generales: Fecha, Cliente, Proyecto, Software: Qrystalos, Versión, Entorno de Test/URL
+3. OBJETIVO / ALCANCE (párrafo estándar sobre dejar constancia de aceptación para autorizar despliegue a producción)
+4. DETALLE DE REQUERIMIENTOS PROBADOS Y ACEPTADOS CLIENTE (lista los requerimientos proporcionados)
+5. OBSERVACIONES (incluye la actividad y descripción)
+6. EQUIPO RESPONSABLE IX (lista cada rol con su nombre)
+7. DECLARACIÓN DE LA ACEPTACIÓN FORMAL (párrafo indicando resultado SATISFACTORIO e implementación en http://qrystalos.com, nota sobre posible lentitud y Ctrl+Shift+R)
+8. DATOS DE AUTORIZACIÓN (campos en blanco: Nombre y Apellido, Cargo, Fecha)
+9. Al final: FO-QA-01. V03 – 03/10/2025
 
-Datos proporcionados:
-Fecha: ${fecha}
+Datos:
+Fecha: ${fmtFecha(document.getElementById('r-fecha').value)}
 Cliente: ${cli}
-Proyecto: ${document.getElementById('r-proy').value || 'No especificado'}
-Versión: ${document.getElementById('r-ver').value || '1.6'}
-URL Test: ${document.getElementById('r-url').value || 'https://api-test.qrystalos.com/#/'}
+Proyecto: ${document.getElementById('r-proy').value||'No especificado'}
+Versión: ${document.getElementById('r-ver').value||'1.6'}
+URL Test: ${document.getElementById('r-url').value||'https://api-test.qrystalos.com/#/'}
 Requerimientos:
 ${tablaStr}
-Observaciones: ${document.getElementById('r-obs').value || 'Sin observaciones adicionales'}
-Desarrollo: ${document.getElementById('r-dev').value || '—'}
-QA: ${document.getElementById('r-qa').value || 'Elvis Rincón'}
-Soporte: ${document.getElementById('r-sop').value || '—'}
-Despliegue: ${document.getElementById('r-des').value || 'Eberth Zerpa'}
-Gerente de Proyecto: ${document.getElementById('r-ger').value || 'Jaime De La Peña'}
-Código formulario: FO-QA-01. V03 – 03/10/2025`;
-
-  try {
-    const txt = await callClaude(prompt);
-    document.getElementById('r-txt').textContent = txt;
-    const rd = document.getElementById('r-res').dataset;
-    rd.cli = cli; rd.ref = document.getElementById('r-proy').value || '—'; rd.txt = txt;
-    document.getElementById('r-res').style.display = 'block';
-  } catch(e) { showToast('Error: ' + e.message); }
-  setLoading('r-load', false);
+Observaciones: ${document.getElementById('r-obs').value||'Sin observaciones adicionales'}
+Desarrollo: ${document.getElementById('r-dev').value||'—'}
+QA: ${document.getElementById('r-qa').value||'—'}
+Soporte: ${document.getElementById('r-sop').value||'—'}
+Despliegue: ${document.getElementById('r-des').value||'—'}
+Gerente de Proyecto: ${document.getElementById('r-ger').value||'—'}`;
+  try{
+    const txt=await callGemini(prompt);
+    document.getElementById('r-txt').textContent=txt;
+    const rd=document.getElementById('r-res').dataset;
+    rd.cli=cli;rd.ref=document.getElementById('r-proy').value||'—';rd.txt=txt;
+    document.getElementById('r-res').style.display='block';
+    document.getElementById('r-res').scrollIntoView({behavior:'smooth',block:'start'});
+  }catch(e){showToast('Error: '+e.message);}
+  setLoad('r-load',false);
 }
 
-// ─── ACTA ACTIVIDAD ───────────────────────────────────
-function limpiarAct() {
-  ['a-dia','a-mes','a-ano','a-proy','a-ciu','a-ing','a-dur','a-real','a-pend','a-fir1','a-fir2'].forEach(id => {
-    const el = document.getElementById(id); if (el) el.value = '';
-  });
-  document.getElementById('a-res').style.display = 'none';
+// ACTA ACT
+function limpiarAct(){
+  ['a-dia','a-mes','a-ano','a-proy','a-ciu','a-ing','a-dur','a-real','a-pend','a-fir1','a-fir2'].forEach(id=>{const e=document.getElementById(id);if(e)e.value='';});
+  document.getElementById('a-res').style.display='none';
 }
-
-async function generarActaAct() {
-  if (!apiKey) { showToast('⚠ Ingresa tu API key primero'); return; }
-  const real = document.getElementById('a-real').value.trim();
-  if (!real) { showToast('Ingresa las actividades realizadas'); return; }
-
-  setLoading('a-load', true);
-  document.getElementById('a-res').style.display = 'none';
-
-  const prompt = `Redacta el texto completo de un ACTA DE SOPORTE / ACTIVIDAD para IX Colombia SAS.
+async function generarActaAct(){
+  const real=document.getElementById('a-real').value.trim();
+  if(!real){showToast('Ingresa las actividades realizadas');return;}
+  setLoad('a-load',true);
+  document.getElementById('a-res').style.display='none';
+  const fir2=document.getElementById('a-fir2').value||'Cliente';
+  const prompt=`Redacta el texto completo de un ACTA DE SOPORTE / ACTIVIDAD para IX Colombia SAS.
 Solo texto plano, sin asteriscos ni markdown. Lenguaje formal colombiano. Mayúsculas solo en títulos de sección.
 
 Estructura exacta:
-1. ACTA DE ACTIVIDAD — IX COLOMBIA SAS
-2. Tabla de encabezado:
-   Fecha Soporte: Día: ___ Mes: ___ Año: ___
-   Proyecto: ___ | Ciudad: ___
-   Ingeniero asignado de soporte: ___ | Duración: ___
+1. Encabezado: ACTA DE ACTIVIDAD — IX COLOMBIA SAS
+2. Tabla de datos: Fecha Soporte (Día / Mes / Año), Proyecto, Ciudad, Ingeniero asignado de soporte, Duración
 3. ACTIVIDADES REALIZADAS
-(detalla las actividades realizadas de forma clara y profesional)
 4. ACTIVIDADES PENDIENTE
-(detalla o indica Ninguna)
-5. FIRMAS
-   Nombre y firma (IX COLOMBIA SAS): _______________
-   Nombre y firma (${document.getElementById('a-fir2').value || 'Cliente'}): _______________
+5. FIRMAS: Nombre y firma (IX COLOMBIA SAS) / Nombre y firma (${fir2})
 
 Datos:
-Día: ${document.getElementById('a-dia').value || '—'}
-Mes: ${document.getElementById('a-mes').value || '—'}
-Año: ${document.getElementById('a-ano').value || '2026'}
-Proyecto: ${document.getElementById('a-proy').value || 'No especificado'}
-Ciudad: ${document.getElementById('a-ciu').value || 'Barranquilla'}
-Ingeniero: ${document.getElementById('a-ing').value || '—'}
-Duración: ${document.getElementById('a-dur').value || '—'}
+Día: ${document.getElementById('a-dia').value||'—'}
+Mes: ${document.getElementById('a-mes').value||'—'}
+Año: ${document.getElementById('a-ano').value||'2026'}
+Proyecto: ${document.getElementById('a-proy').value||'No especificado'}
+Ciudad: ${document.getElementById('a-ciu').value||'Barranquilla'}
+Ingeniero: ${document.getElementById('a-ing').value||'—'}
+Duración: ${document.getElementById('a-dur').value||'—'}
 Actividades realizadas: ${real}
-Actividades pendientes: ${document.getElementById('a-pend').value || 'Ninguna'}
-Firma IX Colombia: ${document.getElementById('a-fir1').value || '—'}
-Firma cliente: ${document.getElementById('a-fir2').value || '—'}`;
-
-  try {
-    const txt = await callClaude(prompt);
-    document.getElementById('a-txt').textContent = txt;
-    const rd = document.getElementById('a-res').dataset;
-    rd.cli = document.getElementById('a-proy').value || 'Sin proyecto';
-    rd.ref = `${document.getElementById('a-dia').value}/${document.getElementById('a-mes').value}/${document.getElementById('a-ano').value}`;
-    rd.txt = txt;
-    document.getElementById('a-res').style.display = 'block';
-  } catch(e) { showToast('Error: ' + e.message); }
-  setLoading('a-load', false);
+Actividades pendientes: ${document.getElementById('a-pend').value||'Ninguna'}
+Firma IX Colombia: ${document.getElementById('a-fir1').value||'—'}
+Firma cliente: ${fir2}`;
+  try{
+    const txt=await callGemini(prompt);
+    document.getElementById('a-txt').textContent=txt;
+    const rd=document.getElementById('a-res').dataset;
+    rd.cli=document.getElementById('a-proy').value||'Sin proyecto';
+    rd.ref=`${document.getElementById('a-dia').value||'—'}/${document.getElementById('a-mes').value||'—'}/${document.getElementById('a-ano').value||'2026'}`;
+    rd.txt=txt;
+    document.getElementById('a-res').style.display='block';
+    document.getElementById('a-res').scrollIntoView({behavior:'smooth',block:'start'});
+  }catch(e){showToast('Error: '+e.message);}
+  setLoad('a-load',false);
 }
 
-function guardarActa(tipo) {
-  const rd = document.getElementById((tipo === 'req' ? 'r' : 'a') + '-res').dataset;
-  push({
-    tipo: 'acta-' + tipo,
-    subtipo: tipo === 'req' ? 'Acta requerimiento' : 'Acta actividad',
-    cliente: rd.cli || 'Sin especificar',
-    modulo: '—', ref: rd.ref || '—',
-    desc: rd.cli || '—',
-    estado: 'pendiente', acta: rd.txt
-  });
+function guardarActa(tipo){
+  const rd=document.getElementById((tipo==='req'?'r':'a')+'-res').dataset;
+  push({tipo:'acta-'+tipo,subtipo:tipo==='req'?'Acta requerimiento':'Acta actividad',cliente:rd.cli||'Sin especificar',modulo:'—',ref:rd.ref||'—',desc:rd.cli||'—',estado:'pendiente',acta:rd.txt});
   showToast('Acta guardada en seguimiento ✓');
 }
 
-// ─── SEGUIMIENTO ──────────────────────────────────────
-function push(reg) {
-  reg.id = Date.now();
-  reg.fecha = new Date().toLocaleDateString('es-CO');
-  recs.unshift(reg);
-  localStorage.setItem('qrystaloshub_recs', JSON.stringify(recs));
-  document.getElementById('nav-badge').style.display = 'inline';
-  document.getElementById('nav-badge').textContent = recs.length;
+// SEGUIMIENTO
+function push(reg){
+  reg.id=Date.now();reg.fecha=new Date().toLocaleDateString('es-CO');
+  recs.unshift(reg);localStorage.setItem('qhub_recs',JSON.stringify(recs));
+  const nb=document.getElementById('nav-badge');nb.style.display='inline';nb.textContent=recs.length;
   actualizarMetricas();
 }
-
-function actualizarMetricas() {
-  document.getElementById('m-tot').textContent = recs.length;
-  document.getElementById('m-pen').textContent = recs.filter(r => r.estado === 'pendiente').length;
-  document.getElementById('m-dev').textContent = recs.filter(r => r.tipo === 'desarrollo').length;
-  if (recs.length > 0) {
-    document.getElementById('nav-badge').style.display = 'inline';
-    document.getElementById('nav-badge').textContent = recs.length;
-  }
+function actualizarMetricas(){
+  document.getElementById('m-tot').textContent=recs.length;
+  document.getElementById('m-pen').textContent=recs.filter(r=>r.estado==='pendiente').length;
+  document.getElementById('m-dev').textContent=recs.filter(r=>r.tipo==='desarrollo').length;
+}
+function toggleEstado(id){
+  const r=recs.find(x=>x.id===id);if(!r)return;
+  r.estado=r.estado==='pendiente'?'firmada':'pendiente';
+  localStorage.setItem('qhub_recs',JSON.stringify(recs));
+  actualizarMetricas();renderTabla();
+}
+function eliminar(id){
+  if(!confirm('¿Eliminar este registro?'))return;
+  recs=recs.filter(x=>x.id!==id);
+  localStorage.setItem('qhub_recs',JSON.stringify(recs));
+  const nb=document.getElementById('nav-badge');nb.textContent=recs.length;
+  if(!recs.length)nb.style.display='none';
+  actualizarMetricas();renderTabla();
+}
+function renderTabla(){
+  const f=document.getElementById('filtro')?.value||'';
+  let datos=recs;
+  if(f==='soporte')datos=recs.filter(r=>r.tipo==='soporte');
+  else if(f==='desarrollo')datos=recs.filter(r=>r.tipo==='desarrollo');
+  else if(f==='capacitacion')datos=recs.filter(r=>r.tipo==='capacitacion');
+  else if(f==='req-pen')datos=recs.filter(r=>r.tipo==='acta-req'&&r.estado==='pendiente');
+  else if(f==='req-fir')datos=recs.filter(r=>r.tipo==='acta-req'&&r.estado==='firmada');
+  else if(f==='act-pen')datos=recs.filter(r=>r.tipo==='acta-act'&&r.estado==='pendiente');
+  else if(f==='act-fir')datos=recs.filter(r=>r.tipo==='acta-act'&&r.estado==='firmada');
+  const wrap=document.getElementById('tabla-wrap');
+  if(!datos.length){wrap.innerHTML='<div class="empty">📭 No hay registros con este filtro.</div>';return;}
+  wrap.innerHTML=`<div class="table-wrap"><table><thead><tr><th>Fecha</th><th>Cliente / Proyecto</th><th>Módulo</th><th>Tipo</th><th>Ref.</th><th>Estado</th><th></th></tr></thead><tbody>${datos.map(r=>{
+    const esActa=r.tipo.startsWith('acta');
+    const bc=r.tipo==='desarrollo'?'b-dev':r.tipo==='capacitacion'?'b-cap':esActa?(r.tipo==='acta-act'?'b-act':(r.estado==='firmada'?'b-fir':'b-pen')):'b-sop';
+    const bl=r.tipo==='desarrollo'?'Desarrollo':r.tipo==='capacitacion'?'Capacitación':r.subtipo;
+    const est=esActa?`<span class="badge ${r.estado==='firmada'?'b-fir':'b-pen'}">${r.estado==='firmada'?'✓ Firmada':'Pendiente firma'}</span>`:`<span style="color:var(--text-muted);font-size:13px">${r.estado}</span>`;
+    const tog=esActa?`<button class="icon-btn" onclick="toggleEstado(${r.id})">${r.estado==='firmada'?'↩':'✓'}</button>`:'';
+    return`<tr><td style="color:var(--text-muted);font-size:13px;white-space:nowrap">${r.fecha}</td><td style="font-weight:500">${r.cliente}</td><td style="color:var(--text-muted);font-size:13px">${r.modulo}</td><td><span class="badge ${bc}">${bl}</span></td><td style="color:var(--text-muted);font-size:13px">${r.ref}</td><td>${est}</td><td style="display:flex;gap:4px;align-items:center">${tog}<button class="icon-btn" onclick="eliminar(${r.id})">🗑</button></td></tr>`;
+  }).join('')}</tbody></table></div>`;
 }
 
-function toggleEstado(id) {
-  const r = recs.find(x => x.id === id); if (!r) return;
-  r.estado = r.estado === 'pendiente' ? 'firmada' : 'pendiente';
-  localStorage.setItem('qrystaloshub_recs', JSON.stringify(recs));
-  actualizarMetricas(); renderTabla();
+function copiar(id,btn){
+  navigator.clipboard.writeText(document.getElementById(id).textContent).then(()=>{
+    const o=btn.innerHTML;btn.innerHTML='✓ Copiado';setTimeout(()=>btn.innerHTML=o,2000);
+  });
 }
-
-function eliminar(id) {
-  if (!confirm('¿Eliminar este registro?')) return;
-  recs = recs.filter(x => x.id !== id);
-  localStorage.setItem('qrystaloshub_recs', JSON.stringify(recs));
-  document.getElementById('nav-badge').textContent = recs.length;
-  actualizarMetricas(); renderTabla();
-}
-
-function renderTabla() {
-  const f = document.getElementById('filtro')?.value || '';
-  let datos = recs;
-  if (f === 'soporte') datos = recs.filter(r => r.tipo === 'soporte');
-  else if (f === 'desarrollo') datos = recs.filter(r => r.tipo === 'desarrollo');
-  else if (f === 'capacitacion') datos = recs.filter(r => r.tipo === 'capacitacion');
-  else if (f === 'req-pen') datos = recs.filter(r => r.tipo === 'acta-req' && r.estado === 'pendiente');
-  else if (f === 'req-fir') datos = recs.filter(r => r.tipo === 'acta-req' && r.estado === 'firmada');
-  else if (f === 'act-pen') datos = recs.filter(r => r.tipo === 'acta-act' && r.estado === 'pendiente');
-  else if (f === 'act-fir') datos = recs.filter(r => r.tipo === 'acta-act' && r.estado === 'firmada');
-
-  const wrap = document.getElementById('tabla-wrap');
-  if (!datos.length) {
-    wrap.innerHTML = '<div class="empty-state"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg><p>No hay registros con este filtro.</p></div>';
-    return;
-  }
-  wrap.innerHTML = `<div class="table-wrap"><table>
-    <thead><tr><th>Fecha</th><th>Cliente / Proyecto</th><th>Módulo</th><th>Tipo</th><th>Ref.</th><th>Estado</th><th></th></tr></thead>
-    <tbody>${datos.map(r => {
-      const tipo = r.tipo || '';
-      const esActa = tipo.startsWith('acta');
-      const bc = tipo === 'desarrollo' ? 'badge-dev' : tipo === 'capacitacion' ? 'badge-cap' : esActa ? (tipo === 'acta-act' ? 'badge-act' : (r.estado === 'firmada' ? 'badge-fir' : 'badge-pen')) : 'badge-sop';
-      const bl = tipo === 'desarrollo' ? 'Desarrollo' : tipo === 'capacitacion' ? 'Capacitación' : (r.subtipo || 'Soporte');
-      const estadoBadge = esActa ? `<span class="badge ${r.estado === 'firmada' ? 'badge-fir' : 'badge-pen'}">${r.estado === 'firmada' ? '✓ Firmada' : 'Pendiente firma'}</span>` : `<span style="color:var(--text-muted);font-size:13px">${r.estado}</span>`;
-      const toggleBtn = esActa ? `<button class="icon-btn" onclick="toggleEstado(${r.id})" title="${r.estado === 'firmada' ? 'Marcar pendiente' : 'Marcar como firmada'}">
-        ${r.estado === 'firmada' ? '↩' : '✓'}
-      </button>` : '';
-      return `<tr>
-        <td style="color:var(--text-muted);font-size:13px;white-space:nowrap">${r.fecha}</td>
-        <td style="font-weight:500">${r.cliente}</td>
-        <td style="color:var(--text-muted);font-size:13px">${r.modulo}</td>
-        <td><span class="badge ${bc}">${bl}</span></td>
-        <td style="color:var(--text-muted);font-size:13px">${r.ref}</td>
-        <td>${estadoBadge}</td>
-        <td style="display:flex;gap:4px;align-items:center">${toggleBtn}
-          <button class="icon-btn" onclick="eliminar(${r.id})" title="Eliminar">🗑</button>
-        </td>
-      </tr>`;
-    }).join('')}</tbody></table></div>`;
-}
-
-// ─── UTILS ────────────────────────────────────────────
-function copiarTexto(id, btn) {
-  const txt = document.getElementById(id).textContent;
-  navigator.clipboard.writeText(txt).then(() => {
-    const orig = btn.innerHTML;
-    btn.innerHTML = '✓ Copiado';
-    setTimeout(() => btn.innerHTML = orig, 2000);
-  }).catch(() => showToast('No se pudo copiar al portapapeles'));
-}
-
-function setLoading(id, show) {
-  document.getElementById(id).style.display = show ? 'flex' : 'none';
-}
-
-function showToast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 3000);
+function setLoad(id,show){document.getElementById(id).style.display=show?'flex':'none';}
+function showToast(msg){
+  const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3500);
 }
 </script>
 </body>
